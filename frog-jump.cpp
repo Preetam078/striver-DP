@@ -28,6 +28,26 @@ int func2(vector<int>&dp, int n, vector<int>&heights) {
 	return dp[n-1];
 }
 
+//futher space optimization
+int spaceOptimized(int n, vector<int> &heights)
+{
+    // Write your code here.
+	int prev = 0;
+	int prev2 = 0;
+	
+	for( int i = 1; i < n; i++) {
+		int left = prev + abs(heights[i] - heights[i-1]);
+		int right = INT_MAX;
+		if(i > 1){
+			right = prev2 + abs(heights[i] - heights[i-2]);
+		}
+		int curr = min(left,right);
+		prev2 = prev;
+		prev = curr;
+	}
+	return prev;
+}
+
 int frogJump(int n, vector<int> &heights)
 {
     // Write your code here.
